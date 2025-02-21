@@ -25,6 +25,11 @@ import Products from './components/product/Products.vue';
 import CreateProduct from './components/product/CreateProduct.vue';
 import EditProduct from './components/product/EditProduct.vue';
 // End Product
+// Expense Component
+import Expenses from './components/expense/Expenses.vue';
+import CreateExpense from './components/expense/CreateExpense.vue';
+import EditExpense from './components/expense/EditExpense.vue';
+// End Expense
 
 const routes = [
     { path: '/', component: Login },
@@ -48,7 +53,10 @@ const routes = [
     { path: '/products', component: Products },
     { path: '/store-product', component: CreateProduct },
     { path: '/edit-product/:id', component: EditProduct, name: 'edit-product' },
-
+    // Expense Routes
+    { path: '/expenses', component: Expenses },
+    { path: '/store-expense', component: CreateExpense },
+    { path: '/edit-expense/:id', component: EditExpense, name: 'edit-expense' },
 ];
 
 const router = createRouter({

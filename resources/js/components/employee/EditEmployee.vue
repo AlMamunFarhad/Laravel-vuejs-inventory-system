@@ -53,7 +53,7 @@ export default {
             let id = this.$route.params.id;
 
             if (!this.form.photo.startsWith("data:image")) {
-                this.form.photo = this.form.photo; // পুরাতন ছবি ধরে রাখো
+                this.form.photo = this.form.photo; 
             }
 
             axios
@@ -74,7 +74,7 @@ export default {
         <div class="col-md-8 mt-4">
             <div class="card p-4">
                 <div class="d-flex justify-content-between">
-                    <h5 class="card-title">Register a new Employee</h5>
+                    <h5 class="card-title">Update Employee</h5>
                     <router-link class="btn btn-info" to="/employees"
                         >All Employee</router-link
                     >

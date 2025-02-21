@@ -71,6 +71,22 @@
                                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Products</span>
                             </router-link>
                         </li>
+                        <li class="sidebar-header">
+                            Expenses
+                        </li>
+    
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="/store-expense">
+                                <i class="align-middle" data-feather="user"></i> <span
+                                    class="align-middle">Add Expense</span>
+                            </router-link>
+                        </li>
+    
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="/expenses">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Expenses</span>
+                            </router-link>
+                        </li>
                         <li class="sidebar-item">
                             <router-link class="sidebar-link" to="/logout">
                                 <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign
