@@ -1,30 +1,17 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
+use App\Models\Salary;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ExpenseCotroller;
+use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\SupplierController;
-
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
@@ -35,9 +22,17 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('me', [AuthController::class, 'me']);
 
 });
-
+// Resource Controller
 Route::apiResource('/employee', EmployeeController::class);
 Route::apiResource('/supplier', SupplierController::class);
 Route::apiResource('/category', CategoryController::class);
 Route::apiResource('/product', ProductController::class);
 Route::apiResource('/expense', ExpenseCotroller::class);
+Route::apiResource('/customer', CustomerController::class);
+
+Route::post('/salary/paid/{id}', [SalaryController::class, 'salaryPaid']);
+Route::get('/salary', [SalaryController::class, 'salaries']);
+Route::get('/salary/view/{id}', [SalaryController::class, 'viewSalary']);
+Route::get('/edit/salary/{id}', [SalaryController::class, 'editSalary']);
+Route::put('/update/salary/{id}', [SalaryController::class, 'updateSalary']);
+Route::put('/update/stock/{id}', [ProductController::class, 'updateStock']);

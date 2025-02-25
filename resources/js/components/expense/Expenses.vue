@@ -51,7 +51,6 @@
 <script>
 import axios from "axios";
 import User from "../../Helpers/User";
-
 export default {
     mounted() {
         if (!User.loggedIn()) {

@@ -40,6 +40,22 @@
                             </router-link>
                         </li>
                         <li class="sidebar-header">
+                            Customers
+                        </li>
+    
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="/store-customer">
+                                <i class="align-middle" data-feather="user"></i> <span
+                                    class="align-middle">Add Customer</span>
+                            </router-link>
+                        </li>
+    
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="/customers">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Customers</span>
+                            </router-link>
+                        </li>
+                        <li class="sidebar-header">
                             Categories
                         </li>
     
@@ -71,6 +87,11 @@
                                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Products</span>
                             </router-link>
                         </li>
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="/stock">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Stock</span>
+                            </router-link>
+                        </li>
                         <li class="sidebar-header">
                             Expenses
                         </li>
@@ -85,6 +106,29 @@
                         <li class="sidebar-item">
                             <router-link class="sidebar-link" to="/expenses">
                                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Expenses</span>
+                            </router-link>
+                        </li>
+                        <li class="sidebar-header">
+                            Salaries
+                        </li>
+    
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="/given-salary">
+                                <i class="align-middle" data-feather="plus"></i> <span
+                                    class="align-middle">Pay Salary</span>
+                            </router-link>
+                        </li>
+    
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="#">
+                                <i class="align-middle" data-feather="user"></i> <span
+                                    class="align-middle">Add Salary</span>
+                            </router-link>
+                        </li>
+    
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link" to="/salaries">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Salaries</span>
                             </router-link>
                         </li>
                         <li class="sidebar-item">

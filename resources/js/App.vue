@@ -27,10 +27,10 @@ export default {
     components: { Navbar, Sidebar },
     computed: {
         currentRoute() {
-            return this.$route.path; // বর্তমান Route Path পাবে
+            return this.$route.path; 
         },
         hiddenRoutes() {
-            return ["/", "/register", "/forgot-password"]; // এখানে Navbar & Sidebar থাকবে না
+            return ["/", "/register", "/forgot-password"]; 
         },
     },
 };

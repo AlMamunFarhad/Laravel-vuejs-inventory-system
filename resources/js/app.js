@@ -1,5 +1,4 @@
 import './bootstrap';
-
 import 'noty/lib/noty.css';
 
 

@@ -42,42 +42,30 @@ export default {
                 reader.readAsDataURL(file);
             }
         },
-        // updateProduct() {
-        //     let id = this.$route.params.id;
-        //     if (!this.form.photo.startsWith("data:image")) {
-        //         this.form.photo = this.form.photo; 
-        //     }
-        //     axios.put("/api/product/"+id, this.form)
-        //         .then((res) => {
-        //             notification.success();
-        //             this.$router.push("/products");
-        //         })
-        //         .catch((error) => (this.errors = error.response.data.errors));
-        // },
 
         updateProduct() {
-    let id = this.$route.params.id;
-    // যদি photo না থাকে, তবে খালি স্ট্রিং দিয়ে সেট করো
-    let photo = this.form.photo || "";
-    if (photo.startsWith("data:image")) {
-        this.form.photo = photo;
-    }
-    axios.put("/api/product/" + id, this.form)
-        .then((res) => {
-            notification.success();
-            this.$router.push("/products");
-        })
-        .catch((error) => (this.errors = error.response.data.errors));
-},
-
+            let id = this.$route.params.id;
+            let photo = this.form.photo || "";
+            if (photo.startsWith("data:image")) {
+                this.form.photo = photo;
+            }
+            axios
+                .put("/api/product/" + id, this.form)
+                .then((res) => {
+                    notification.success();
+                    this.$router.push("/products");
+                })
+                .catch((error) => (this.errors = error.response.data.errors));
+        },
     },
     created() {
         let id = this.$route.params.id;
-        axios.get(`/api/product/${id}`)
-        .then(({data}) => {
-            return this.form = data
-        })
-        .catch(error => this.errors = error.response.data.errors);
+        axios
+            .get(`/api/product/${id}`)
+            .then(({ data }) => {
+                return (this.form = data);
+            })
+            .catch((error) => (this.errors = error.response.data.errors));
 
         axios
             .get("/api/category/")

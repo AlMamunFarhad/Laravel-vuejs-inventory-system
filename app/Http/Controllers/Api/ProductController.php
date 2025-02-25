@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
+
 class ProductController extends Controller
 {
     /**
@@ -142,6 +143,18 @@ class ProductController extends Controller
        ]);
 
     }
+
+    // Update Product Stock
+    public function updateStock(Request $request, string $id)
+    {
+        $vaidateData = $request->validate([
+            'product_quantity' => 'required',
+        ]);
+        $product = DB::table('products')->where('id', $id)->update([
+            'product_quantity' => $request->product_quantity,
+        ]);
+    }
+
 
     /**
      * Remove the specified resource from storage.

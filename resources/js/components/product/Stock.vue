@@ -3,14 +3,14 @@
         <div class="col-12 col-lg-12 col-xxl-12 d-flex">
             <div class="card flex-fill p-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title mb-0 fs-2">Products</h3>
+                    <h3 class="card-title mb-0 fs-2">Stocks</h3>
 
                     <div class="">
                         <div class="d-flex justify-content-end">
                             <router-link
-                                to="/store-product"
+                                to="/products"
                                 class="btn btn-info mb-3"
-                                >Add Product</router-link
+                                >Products</router-link
                             >
                         </div>
                         <input
@@ -29,11 +29,9 @@
                             <th>Category</th>
                             <th>Product Name</th>
                             <th>Product Code</th>
-                            <th>Root</th>
                             <th>Buying Price</th>
-                            <th>Selling Price</th>
-                            <th>Buynig Date</th>
                             <th>Product Quantity</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -51,24 +49,20 @@
                             <td>{{ product.category_name }}</td>
                             <td>{{ product.product_name }}</td>
                             <td>{{ product.product_code }}</td>
-                            <td>{{ product.root }}</td>
                             <td>{{ product.buying_price }}</td>
-                            <td>{{ product.selling_price }}</td>
-                            <td>{{ product.buying_date }}</td>
                             <td>{{ product.product_quantity }}</td>
+                            <td>
+                                <span v-if="product.product_quantity > 0" class="badge bg-success">Available</span>
+                                <span v-else class="badge bg-danger">Out of Stock</span>
+                            </td>
                             <td>
                                 <router-link
                                     :to="{
-                                        name: 'edit-product',
+                                        name: 'edit-stock',
                                         params: { id: product.id },
                                     }"
                                     class="btn btn-sm btn-warning me-2"
                                     >Edit</router-link
-                                >
-                                <a
-                                    @click="deleteProduct(product.id)"
-                                    class="btn btn-sm btn-danger"
-                                    >Delete</a
                                 >
                             </td>
                         </tr>
@@ -107,35 +101,6 @@ export default {
                 .get("/api/product/")
                 .then(({ data }) => (this.products = data))
                 .catch((error) => (this.errors = error.response.data.errors));
-        },
-        deleteProduct(id) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios
-                        .delete("/api/product/" + id)
-                        .then(() => {
-                            this.products = this.products.filter(
-                                (product) => product.id != id
-                            );
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success",
-                            });
-                        })
-                        .catch(() => {
-                            this.$router.push("/products");
-                        });
-                }
-            });
         },
     },
     created() {
