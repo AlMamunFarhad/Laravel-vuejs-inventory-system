@@ -5,6 +5,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\PosController;
 use App\Http\Controllers\Api\ExpenseCotroller;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\ProductController;
@@ -36,3 +37,5 @@ Route::get('/salary/view/{id}', [SalaryController::class, 'viewSalary']);
 Route::get('/edit/salary/{id}', [SalaryController::class, 'editSalary']);
 Route::put('/update/salary/{id}', [SalaryController::class, 'updateSalary']);
 Route::put('/update/stock/{id}', [ProductController::class, 'updateStock']);
+
+Route::get('/getting/product/{id}', [PosController::class, 'productByCategory']);

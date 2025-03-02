@@ -43,6 +43,10 @@ import Salaries from './components/salary/Salaries.vue';
 import CreateSalary from './components/salary/CreateSalary.vue';
 import EditSalary from './components/salary/EditSalary.vue';
 import ViewSalaray from './components/salary/View_Salary.vue';
+// End Salary
+// Print of Pos Component
+import PrintOfSale from './components/pos/PrintOfSale.vue';
+
 
 
 const routes = [
@@ -83,6 +87,8 @@ const routes = [
     {path: '/salaries', component: Salaries},
     {path:'/edit-salary/:id', component: EditSalary, name: 'edit-salary'},
     {path:'/view-salary/:id', component: ViewSalaray, name: 'view-salary'},
+    // Print Routes
+    {path: '/pos', component: PrintOfSale},
 ];
 const router = createRouter({
     history: createWebHistory(),

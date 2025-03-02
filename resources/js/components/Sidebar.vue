@@ -7,11 +7,17 @@
                     </router-link>
     
                     <ul class="sidebar-nav">
+                        <li class="sidebar-item">
+                            <router-link class="sidebar-link active" to="/pos">
+                                <i class="align-middle" data-feather="user"></i> <span
+                                    class="align-middle">Pos</span>
+                            </router-link>
+                        </li>
                         <li class="sidebar-header">
                             Employee
                         </li>
     
-                        <li class="sidebar-item active">
+                        <li class="sidebar-item">
                             <router-link class="sidebar-link" to="/store-employee">
                                 <i class="align-middle" data-feather="user"></i> <span
                                     class="align-middle">Add Employee</span>
