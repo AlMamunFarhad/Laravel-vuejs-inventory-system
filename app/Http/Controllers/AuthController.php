@@ -23,15 +23,12 @@ class AuthController extends Controller
 
     public function signup(Request $request)
     {
-
         $validate = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
         ]);
-
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -42,33 +39,8 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Email or password is invalid'], 401);
         }
-        
-
-        // return $this->login($user);
         return $this->respondWithToken($token);
-
-        // $Validator = Validator::make($request->all(), [
-        //     'name' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => ['required'],
-        // ]);
-
-        // if ($Validator->fails()) {
-        //     return response()->json($Validator->errors(), 422);
-        // }
-
-        
-
-        // return response()->json($user, 201);
-
-
-        // if (! $token = auth()->attempt($user)) {
-        //     return response()->json(['error' => 'Unauthorized'], 401);
-        // }
-
-        // return $this->respondWithToken($token);
     }
-
     /**
      * Get a JWT via given credentials.
      *
@@ -84,10 +56,8 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Email or password is invalid'], 401);
         }
-
         return $this->respondWithToken($token);
     }
-
     /**
      * Get the authenticated User.
      *
@@ -97,7 +67,6 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
-
     /**
      * Log the user out (Invalidate the token).
      *
@@ -109,7 +78,6 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Successfully logged out']);
     }
-
     /**
      * Refresh a token.
      *
@@ -119,7 +87,6 @@ class AuthController extends Controller
     {
         return $this->respondWithToken(auth()->refresh());
     }
-
     /**
      * Get the token array structure.
      *
