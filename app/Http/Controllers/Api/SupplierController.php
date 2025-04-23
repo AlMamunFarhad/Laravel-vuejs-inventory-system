@@ -11,7 +11,6 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class SupplierController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -19,9 +18,7 @@ class SupplierController extends Controller
     {
         $suppliers = DB::table('suppliers')->get();
         return response()->json($suppliers); 
-
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -52,7 +49,6 @@ class SupplierController extends Controller
             $supplier->address = $request->address;
             $supplier->shop_name = $request->shop_name;
             $supplier->photo = $img_path;
-
             $supplier->save();
         } else {
             // Store the employee details
@@ -65,7 +61,6 @@ class SupplierController extends Controller
             $supplier->save();
         }
     }
-
     /**
      * Display the specified resource.
      */
@@ -74,8 +69,6 @@ class SupplierController extends Controller
         $supplier = DB::table('suppliers')->where('id', $id)->first();
         return response()->json($supplier);
     }
-
-
     /**
      * Update the specified resource in storage.
      */
@@ -124,7 +117,6 @@ class SupplierController extends Controller
                     'photo' => asset( $supplier->photo),
                 ]);
     }
-
     /**
      * Remove the specified resource from storage.
      */
