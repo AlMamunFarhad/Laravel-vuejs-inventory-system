@@ -31,7 +31,6 @@ class CategoryController extends Controller
 
         return response()->json($category);
     }
-
     /**
      * Display the specified resource.
      */
@@ -40,7 +39,6 @@ class CategoryController extends Controller
         $category = DB::table('categories')->where('id', $id)->first();
         return response()->json($category);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -55,9 +53,7 @@ class CategoryController extends Controller
         ]);
 
         return response()->json($category);
-
     }
-
     /**
      * Remove the specified resource from storage.
      */
