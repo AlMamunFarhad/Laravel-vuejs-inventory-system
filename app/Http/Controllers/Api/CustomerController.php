@@ -19,22 +19,17 @@ class CustomerController extends Controller
         $customers = DB::table('customers')->get();
         return response()->json($customers);
     }
-
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        
         $validateData = $request->validate([
             'name' => 'required',
             'email' => 'email',
             'phone' => 'required',
             'address' => 'required',
         ]);
-
-
         $photo = $request->photo;
         if ($photo) {
             $ext = explode('/', explode(':', $photo)[1])[1];
@@ -63,7 +58,6 @@ class CustomerController extends Controller
             $customer->save();
         }
     }
-
     /**
      * Display the specified resource.
      */
@@ -72,7 +66,6 @@ class CustomerController extends Controller
         $customer = DB::table('customers')->where('id',$id)->first();
         return response()->json($customer);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -84,9 +77,7 @@ class CustomerController extends Controller
             'phone' => 'required',
             'address' => 'required',
         ]);
-
         $customer = Customer::where('id', $id)->first();
-
         $photo = $request->photo;
         if ($request->photo && strpos($request->photo, 'data:image') === 0) {
             $ext = explode('/', explode(':', $photo)[1])[1];
@@ -114,7 +105,6 @@ class CustomerController extends Controller
         }
 
     }
-
     /**
      * Remove the specified resource from storage.
      */
