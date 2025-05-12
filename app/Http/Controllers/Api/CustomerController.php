@@ -16,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = DB::table('customers')->get();
+        $customers = Customer::get();
         return response()->json($customers);
     }
     /**
@@ -41,21 +41,34 @@ class CustomerController extends Controller
             $img_path = "backend/customer/" . $rename_img;
             $img->save($img_path);
             // Store the Customer details
-            $customer = new Customer();
-            $customer->name = $request->name;
-            $customer->email = $request->email;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->photo = $img_path;
-            $customer->save();
+            // $customer = new Customer();
+            // $customer->name = $request->name;
+            // $customer->email = $request->email;
+            // $customer->phone = $request->phone;
+            // $customer->address = $request->address;
+            // $customer->photo = $img_path;
+            // $customer->save();
+            Customer::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'photo' => $img_path
+            ]);
         } else {
             // Store the Customer details
-            $customer = new Customer();
-            $customer->name = $request->name;
-            $customer->email = $request->email;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->save();
+            // $customer = new Customer();
+            // $customer->name = $request->name;
+            // $customer->email = $request->email;
+            // $customer->phone = $request->phone;
+            // $customer->address = $request->address;
+            // $customer->save();
+            Customer::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
         }
     }
     /**
@@ -63,7 +76,8 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        $customer = DB::table('customers')->where('id',$id)->first();
+        // Fetch the customer details from the database
+        $customer = Customer::findOrFail($id);
         return response()->json($customer);
     }
     /**
@@ -77,7 +91,12 @@ class CustomerController extends Controller
             'phone' => 'required',
             'address' => 'required',
         ]);
+<<<<<<< HEAD
         $customer = Customer::where('id', $id)->first();
+=======
+
+        $customer = Customer::findOrFail($id);
+>>>>>>> 68deda0 (Cleaned up duplicate commits and added updated code)
         $photo = $request->photo;
         if ($request->photo && strpos($request->photo, 'data:image') === 0) {
             $ext = explode('/', explode(':', $photo)[1])[1];
@@ -89,19 +108,33 @@ class CustomerController extends Controller
             $img_path = "backend/customer/" . $rename_img;
             $img->save($img_path);
             // Store the Customer details
-            $customer->name = $request->name;
-            $customer->email = $request->email;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->photo = $img_path;
-            $customer->save();
+            // $customer->name = $request->name;
+            // $customer->email = $request->email;
+            // $customer->phone = $request->phone;
+            // $customer->address = $request->address;
+            // $customer->photo = $img_path;
+            // $customer->save();
+            $customer->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'photo' => $img_path
+            ]);
         } else {
             // Store the Customer details
-            $customer->name = $request->name;
-            $customer->email = $request->email;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->save();
+        //     $customer->name = $request->name;
+        //     $customer->email = $request->email;
+        //     $customer->phone = $request->phone;
+        //     $customer->address = $request->address;
+        //     $customer->save();
+        // }
+            $customer->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
         }
 
     }

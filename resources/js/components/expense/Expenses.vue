@@ -66,14 +66,14 @@ export default {
     computed: {
         filterSearch() {
             return this.expenses.filter((expense) => {
-                return expense.expense_date.match(this.searchTerm);
+                return expense.details.match(this.searchTerm);
             });
         },
     },
     methods: {
         allExpense() {
             axios
-                .get("/api/expense")
+                .get("/api/expense/")
                 .then(({ data }) => (this.expenses = data))
                 .catch((error) => (this.errors = error.response.data.errors));
         },

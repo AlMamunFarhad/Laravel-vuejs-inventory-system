@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     use HasFactory;
+    protected $table = 'expenses';
 
     protected $fillable = [
-        'amount',
         'details',
+        'amount',
+        'expense_date'
     ];
 }

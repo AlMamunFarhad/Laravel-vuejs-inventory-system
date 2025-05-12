@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Expense;
 
 class ExpenseCotroller extends Controller
 {
@@ -13,7 +14,8 @@ class ExpenseCotroller extends Controller
      */
     public function index()
     {
-        $expenses = DB::table('expenses')->get();
+        // Fetch all expenses from the database
+        $expenses = Expense::get();
         return response()->json($expenses);
     }
 
@@ -26,13 +28,12 @@ class ExpenseCotroller extends Controller
             'amount' => 'required',
             'details' => 'required',
         ]);
-
-        DB::table('expenses')->insert([
+       // Create a new expense
+        Expense::create([
             'amount' => $request->amount,
             'details' => $request->details,
             'expense_date' => $request->expense_date,
-    ]);
-
+        ]);
         return response()->json(['message' => 'Expense added successfully']);
     }
 
@@ -41,16 +42,9 @@ class ExpenseCotroller extends Controller
      */
     public function show(string $id)
     {
-        $expense = DB::table('expenses')->where('id', $id)->find($id);
+        // Fetch the expense by ID
+        $expense = Expense::findOrFail($id);
         return response()->json($expense);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -62,13 +56,13 @@ class ExpenseCotroller extends Controller
             'amount' => 'required',
             'details' => 'required',
         ]);
-
-        DB::table('expenses')->where('id', $id)->update([
+        // Update the expense details
+        $expense_update = Expense::findOrFail($id);
+        $expense_update->update([
             'amount' => $request->amount,
             'details' => $request->details,
             'expense_date' => $request->expense_date,
         ]);
-
         return response()->json(['message' => 'Expense updated successfully']);
     }
 
@@ -77,7 +71,9 @@ class ExpenseCotroller extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table('expenses')->where('id', $id)->delete();
+        // Delete the expense by ID
+        $expense = Expense::findOrFail($id);
+        $expense->delete();
         return response()->json(['message' => 'Expense deleted successfully']);
     }
 }

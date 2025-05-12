@@ -14,8 +14,14 @@ class Employee extends Model
         'email',
         'phone',
         'address',
+        'photo',
         'nid',
         'salary',
         'joining_date',	
     ];
+    public function salaries()
+    {
+        return $this->hasMany(Salary::class);
+    }
+
 }

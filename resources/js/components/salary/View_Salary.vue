@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="salary in filterSearch" :key="salary.id">
-                            <td>{{ salary.name }}</td>
+                            <td>{{ salary.employee.name }}</td>
                             <td>{{ salary.salary_month }}</td>
                             <td>{{ salary.amount }}</td>
                             <td>{{ salary.salary_date }}</td>

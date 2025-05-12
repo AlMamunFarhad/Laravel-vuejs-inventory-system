@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -13,22 +14,22 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->get();
+        // Fetch all categories from the database
+        $categories = Category::all();
         return response()->json($categories);
     }
     /**
      * Store a newly created resource in storage.
      */
+    
     public function store(Request $request)
     {
         $validate = $request->validate([
             'category_name' => 'required',
         ]);
-
-        $category = DB::table('categories')->insert([
+        $category = Category::create([
             'category_name' => $request->category_name
         ]);
-
         return response()->json($category);
     }
     /**
@@ -36,7 +37,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = DB::table('categories')->where('id', $id)->first();
+        // Fetch the category by ID
+        $category = Category::findOrFail($id);
         return response()->json($category);
     }
     /**
@@ -47,11 +49,11 @@ class CategoryController extends Controller
         $validate = $request->validate([
             'category_name' => 'required',
         ]);
-
-        $category = DB::table('categories')->where('id', $id)->update([
+        // Update the category details
+        $category = Category::findOrFail($id);
+        $category->update([
             'category_name' => $request->category_name
         ]);
-
         return response()->json($category);
     }
     /**
@@ -59,7 +61,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = DB::table('categories')->where('id', $id)->delete();
+        // Delete the category by ID
+        $category = Category::findOrFail($id);
         return response()->json($category);
     }
 }

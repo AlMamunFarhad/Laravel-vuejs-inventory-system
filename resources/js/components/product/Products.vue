@@ -4,7 +4,6 @@
             <div class="card flex-fill p-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title mb-0 fs-2">Products</h3>
-
                     <div class="">
                         <div class="d-flex justify-content-end">
                             <router-link
@@ -48,7 +47,7 @@
                                     height="100"
                                 />
                             </td>
-                            <td>{{ product.category_name }}</td>
+                            <td>{{ product.category?.category_name }}</td>
                             <td>{{ product.product_name }}</td>
                             <td>{{ product.product_code }}</td>
                             <td>{{ product.root }}</td>

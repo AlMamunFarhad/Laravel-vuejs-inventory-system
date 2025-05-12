@@ -153,13 +153,6 @@ export default {
             this.$router.push({ name: "login" });
         }
     },
-    // computed: {
-    //     currentRoute() {
-    //         return this.$route.path;
-    //     },
-    //     hiddenRoutes() {
-    //         return ['/', '/register', '/forgot-password'];
-    //     }
-    // }
+
 };
 </script>

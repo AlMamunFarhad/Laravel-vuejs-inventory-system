@@ -48,48 +48,6 @@
                             {{ category.category_name }}
                         </button>
                     </li>
-                    <!-- <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link"
-                            id="laptop-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#laptop-tab-pane"
-                            type="button"
-                            role="tab"
-                            aria-controls="laptop-tab-pane"
-                            aria-selected="false"
-                        >
-                            Laptop
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link"
-                            id="camera-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#camera-tab-pane"
-                            type="button"
-                            role="tab"
-                            aria-controls="camera-tab-pane"
-                            aria-selected="false"
-                        >
-                            Camera
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link"
-                            id="mobile-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#mobile-tab-pane"
-                            type="button"
-                            role="tab"
-                            aria-controls="mobile-tab-pane"
-                            aria-selected="false"
-                        >
-                            Mobile
-                        </button>
-                    </li> -->
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div
@@ -136,45 +94,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <!-- </div>
-                    </div>
-                    <div
-                        class="tab-pane fade"
-                        id="computer-tab-pane"
-                        role="tabpanel"
-                        aria-labelledby="profile-tab"
-                        tabindex="0"
-                    >
-                    Computer
-                    </div>
-                    <div
-                        class="tab-pane fade"
-                        id="laptop-tab-pane"
-                        role="tabpanel"
-                        aria-labelledby="profile-tab"
-                        tabindex="0"
-                    >
-                    Laptop
-                    </div>
-                    <div
-                        class="tab-pane fade"
-                        id="camera-tab-pane"
-                        role="tabpanel"
-                        aria-labelledby="camera-tab"
-                        tabindex="0"
-                    >
-                    Camera
-                    </div>
-                    <div
-                        class="tab-pane fade"
-                        id="mobile-tab-pane"
-                        role="tabpanel"
-                        aria-labelledby="profile-tab"
-                        tabindex="0"
-                    >
-                    Mobile
-                    </div>
-                </div> -->
                         </div>
                     </div>
                 </div>
@@ -218,7 +137,6 @@ export default {
                 return getProduct.product_name
                     .toLowerCase()
                     .includes(this.getSearchTerm.toLowerCase());
-                // return getProduct.product_name.match(this.getSearchTerm);
             });
         },
 
@@ -234,8 +152,8 @@ export default {
             axios
                 .get("/api/product/")
                 .then(({ data }) => {
-                    this.products = data; // সব প্রোডাক্ট এখানে সংরক্ষণ করা হচ্ছে
-                    this.getProducts = [...data]; // মূল প্রোডাক্ট কপি করে দেখানোর জন্য ব্যবহার করা হচ্ছে
+                    this.products = data;
+                    this.getProducts = [...data]; 
                 })
                 .catch((error) => (this.errors = error.response.data.errors));
         },
@@ -246,26 +164,9 @@ export default {
                 .then(({ data }) => (this.categories = data))
                 .catch((error) => (this.errors = error.response.data.errors));
         },
-        // productByCategory(id) {
-        //     axios
-        //         .get(`/api/getting/product/${id}`)
-        //         .then(({ data }) => {
-        //             console.log(data);
-        //             this.getProducts = data;
-        //         })
-        //         .catch((error) => (this.errors = error.response.data.errors));
-        // },
-        //         productByCategory(id) {
-        //     axios
-        //         .get(`/api/getting/product/${id}`)
-        //         .then(({ data }) => {
-        //             console.log("Category Products:", data); // কনসোল চেক করো
-        //             this.getProducts = data.length ? [...data] : []; // যদি ডাটা না থাকে তবে খালি অ্যারে সেট করো
-        //         })
-        //         .catch((error) => (this.errors = error.response.data.errors));
-        // }
+       
         productByCategory(id) {
-            this.selectedCategory = id; // ক্যাটাগরি আইডি সেট করা হচ্ছে
+            this.selectedCategory = id; 
             axios
                 .get(`/api/getting/product/${id}`)
                 .then(({ data }) => {
@@ -276,8 +177,8 @@ export default {
         },
 
         showAllProducts() {
-            this.selectedCategory = null; // ক্যাটাগরি রিসেট করা হচ্ছে
-            this.allProducts(); // সব প্রোডাক্ট পুনরায় লোড করা হচ্ছে
+            this.selectedCategory = null;
+            this.allProducts(); 
         },
     },
     created() {
