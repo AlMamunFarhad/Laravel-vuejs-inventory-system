@@ -42,24 +42,6 @@ class SupplierController extends Controller
             $img_path = "backend/supplier/" . $rename_img;
             $img->save($img_path);
             // Store the employee details
-<<<<<<< HEAD
-            $supplier = new Supplier();
-            $supplier->name = $request->name;
-            $supplier->email = $request->email;
-            $supplier->phone = $request->phone;
-            $supplier->address = $request->address;
-            $supplier->shop_name = $request->shop_name;
-            $supplier->photo = $img_path;
-            $supplier->save();
-=======
-            // $supplier = new Supplier();
-            // $supplier->name = $request->name;
-            // $supplier->email = $request->email;
-            // $supplier->phone = $request->phone;
-            // $supplier->address = $request->address;
-            // $supplier->shop_name = $request->shop_name;
-            // $supplier->photo = $img_path;
-            // $supplier->save();
             Supplier::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -68,16 +50,7 @@ class SupplierController extends Controller
                 'shop_name' => $request->shop_name,
                 'photo' => $img_path,
             ]);
->>>>>>> 68deda0 (Cleaned up duplicate commits and added updated code)
         } else {
-            // Store the employee details
-            // $supplier = new Supplier();
-            // $supplier->name = $request->name;
-            // $supplier->email = $request->email;
-            // $supplier->phone = $request->phone;
-            // $supplier->address = $request->address;
-            // $supplier->shop_name = $request->shop_name;
-            // $supplier->save();
             Supplier::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -92,7 +65,6 @@ class SupplierController extends Controller
      */
     public function show(string $id)
     {
-        // $supplier = DB::table('suppliers')->where('id', $id)->first();
         $supplier = Supplier::findOrFail($id);
         return response()->json($supplier);
     }
@@ -131,13 +103,6 @@ class SupplierController extends Controller
                 } else {
                     $supplier->photo = $old_photo; 
                 }
-                // Update the employee details
-                    // $supplier->name = $request->name;
-                    // $supplier->email = $request->email;
-                    // $supplier->phone = $request->phone;
-                    // $supplier->address = $request->address;
-                    // $supplier->shop_name = $request->shop_name;
-                    // $supplier->save();
                     $supplier->update([
                         'name' => $request->name,
                         'email' => $request->email,
@@ -156,7 +121,6 @@ class SupplierController extends Controller
      */
     public function destroy(string $id)
     {
-        // $supplier = DB::table('suppliers')->where('id', $id)->first();
         $supplier = Supplier::findOrFail($id);
         if(!empty($supplier->photo && file_exists(public_path($supplier->photo)))) {
             unlink(public_path($supplier->photo));

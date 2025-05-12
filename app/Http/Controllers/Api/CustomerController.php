@@ -40,14 +40,6 @@ class CustomerController extends Controller
             $img->cover(300, 200);
             $img_path = "backend/customer/" . $rename_img;
             $img->save($img_path);
-            // Store the Customer details
-            // $customer = new Customer();
-            // $customer->name = $request->name;
-            // $customer->email = $request->email;
-            // $customer->phone = $request->phone;
-            // $customer->address = $request->address;
-            // $customer->photo = $img_path;
-            // $customer->save();
             Customer::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -56,13 +48,7 @@ class CustomerController extends Controller
                 'photo' => $img_path
             ]);
         } else {
-            // Store the Customer details
-            // $customer = new Customer();
-            // $customer->name = $request->name;
-            // $customer->email = $request->email;
-            // $customer->phone = $request->phone;
-            // $customer->address = $request->address;
-            // $customer->save();
+
             Customer::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -91,12 +77,8 @@ class CustomerController extends Controller
             'phone' => 'required',
             'address' => 'required',
         ]);
-<<<<<<< HEAD
-        $customer = Customer::where('id', $id)->first();
-=======
 
         $customer = Customer::findOrFail($id);
->>>>>>> 68deda0 (Cleaned up duplicate commits and added updated code)
         $photo = $request->photo;
         if ($request->photo && strpos($request->photo, 'data:image') === 0) {
             $ext = explode('/', explode(':', $photo)[1])[1];
@@ -107,13 +89,7 @@ class CustomerController extends Controller
             $img->cover(300, 200);
             $img_path = "backend/customer/" . $rename_img;
             $img->save($img_path);
-            // Store the Customer details
-            // $customer->name = $request->name;
-            // $customer->email = $request->email;
-            // $customer->phone = $request->phone;
-            // $customer->address = $request->address;
-            // $customer->photo = $img_path;
-            // $customer->save();
+
             $customer->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -122,13 +98,6 @@ class CustomerController extends Controller
                 'photo' => $img_path
             ]);
         } else {
-            // Store the Customer details
-        //     $customer->name = $request->name;
-        //     $customer->email = $request->email;
-        //     $customer->phone = $request->phone;
-        //     $customer->address = $request->address;
-        //     $customer->save();
-        // }
             $customer->update([
                 'name' => $request->name,
                 'email' => $request->email,
