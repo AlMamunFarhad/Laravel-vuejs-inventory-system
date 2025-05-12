@@ -11,16 +11,15 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-     /**
+    /**
      * Create a new AuthController instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('JWT', ['except' => ['login','signup']]);
+        $this->middleware('JWT', ['except' => ['login', 'signup']]);
     }
-
     public function signup(Request $request)
     {
         $validate = $request->validate([
@@ -34,7 +33,6 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        
         $credentials = request(['email', 'password']);
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Email or password is invalid'], 401);
@@ -101,7 +99,7 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()->name,
             'user_id' => auth()->user()->id,
-            'email' => auth()->user()->email,	
+            'email' => auth()->user()->email,
         ]);
     }
 }

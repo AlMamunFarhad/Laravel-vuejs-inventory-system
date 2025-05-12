@@ -11,6 +11,7 @@ class PosController extends Controller
 {
     public function productByCategory($id)
     {
+        // Fetch all products for the given category ID
         $product = Product::where('category_id', $id)->get();
         return response()->json($product);
     }

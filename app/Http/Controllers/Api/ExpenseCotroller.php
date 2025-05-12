@@ -9,26 +9,19 @@ use App\Models\Expense;
 
 class ExpenseCotroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         // Fetch all expenses from the database
         $expenses = Expense::get();
         return response()->json($expenses);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validate = $request->validate([
             'amount' => 'required',
             'details' => 'required',
         ]);
-       // Create a new expense
+        // Create a new expense
         Expense::create([
             'amount' => $request->amount,
             'details' => $request->details,
@@ -36,20 +29,11 @@ class ExpenseCotroller extends Controller
         ]);
         return response()->json(['message' => 'Expense added successfully']);
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
-    {
-        // Fetch the expense by ID
+    {   // Fetch the expense by ID
         $expense = Expense::findOrFail($id);
         return response()->json($expense);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $validate = $request->validate([
@@ -65,10 +49,6 @@ class ExpenseCotroller extends Controller
         ]);
         return response()->json(['message' => 'Expense updated successfully']);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         // Delete the expense by ID

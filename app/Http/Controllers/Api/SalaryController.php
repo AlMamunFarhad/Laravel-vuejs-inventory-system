@@ -14,7 +14,7 @@ class SalaryController extends Controller
         $validData = $request->validate([
             'att_month' => 'required',
         ]);
-
+        // Check if the salary for the month is already paid
         $check = Salary::where('employee_id', $id)->where('salary_month', $request->att_month)->first();
         if ($check) {
             return response()->json([
@@ -36,6 +36,7 @@ class SalaryController extends Controller
     }
     public function salaries()
     {
+        // Fetch all salaries from the database
         $salaries = Salary::select('salary_month')->groupBy('salary_month')->get();
         return response()->json($salaries);
     }
@@ -49,12 +50,14 @@ class SalaryController extends Controller
     }
     public function editSalary(string $id)
     {
+        // Fetch the salary details for the given ID
         $salary = Salary::with('employee')->find($id);
         return response()->json($salary);
     }
     public function updateSalary(Request $request, string $id)
     {
-        $salary = Salary::where('id', $id)->update([
+        // Update the salary details
+        Salary::where('id', $id)->update([
             'employee_id' => $request->id,
             'amount' => $request->salary,
             'salary_month' => $request->att_month,

@@ -11,17 +11,12 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        // Fetch all customers from the database
         $customers = Customer::get();
         return response()->json($customers);
     }
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -30,6 +25,7 @@ class CustomerController extends Controller
             'phone' => 'required',
             'address' => 'required',
         ]);
+        // Create a new customer
         $photo = $request->photo;
         if ($photo) {
             $ext = explode('/', explode(':', $photo)[1])[1];
@@ -48,7 +44,6 @@ class CustomerController extends Controller
                 'photo' => $img_path
             ]);
         } else {
-
             Customer::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -57,18 +52,12 @@ class CustomerController extends Controller
             ]);
         }
     }
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         // Fetch the customer details from the database
         $customer = Customer::findOrFail($id);
         return response()->json($customer);
     }
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $validateData = $request->validate([
@@ -77,7 +66,7 @@ class CustomerController extends Controller
             'phone' => 'required',
             'address' => 'required',
         ]);
-
+        // Update the customer details
         $customer = Customer::findOrFail($id);
         $photo = $request->photo;
         if ($request->photo && strpos($request->photo, 'data:image') === 0) {
@@ -89,7 +78,6 @@ class CustomerController extends Controller
             $img->cover(300, 200);
             $img_path = "backend/customer/" . $rename_img;
             $img->save($img_path);
-
             $customer->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -107,11 +95,9 @@ class CustomerController extends Controller
         }
 
     }
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
+        // Delete the customer by ID
         $customer = Customer::where('id', $id)->first();
         if (!empty($customer->photo) && file_exists(public_path($customer->photo))) {
             unlink(public_path($customer->photo));

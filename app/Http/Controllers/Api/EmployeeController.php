@@ -13,29 +13,12 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class EmployeeController extends Controller
 {
-
-
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         // Fetch all employees from the database
         $employee = Employee::all();
         return response()->json($employee);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -45,7 +28,7 @@ class EmployeeController extends Controller
             'address' => 'required',
             'salary' => 'required',
         ]);
-
+        // Create a new employee
         $photo = $request->photo;
         if ($photo) {
             $ext = explode('/', explode(':', $photo)[1])[1];
@@ -80,28 +63,12 @@ class EmployeeController extends Controller
             ]);
         }
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         // Fetch the employee details from the database
         $employee = Employee::findOrFail($id);
         return response()->json($employee);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         // Employee Update Validation
@@ -112,27 +79,25 @@ class EmployeeController extends Controller
             'address' => 'required',
             'salary' => 'required',
         ]);
-
+        // Check if the employee exists
         $employee = Employee::findOrFail($id);
+        // Upload the employee photo
         $old_photo = $employee->photo;
-        // Update the employee photo
         if ($request->photo && strpos($request->photo, 'data:image') === 0) {
             $ext = explode('/', explode(':', $request->photo)[1])[1];
             $ext = explode(';', $ext)[0];
             $rename_img = time() . "." . $ext;
             $img_path = "backend/employee/" . $rename_img;
-
             $manager = new ImageManager(new Driver());
             $img = $manager->read($request->photo);
             $img->cover(300, 200);
             $img->save($img_path);
-
             if (file_exists($old_photo)) {
                 unlink($old_photo);
             }
-            $employee->photo = $img_path; 
+            $employee->photo = $img_path;
         } else {
-            $employee->photo = $old_photo; 
+            $employee->photo = $old_photo;
         }
         // Update the employee details
         $employee->update([
@@ -144,16 +109,11 @@ class EmployeeController extends Controller
             'nid' => $request->nid,
             'joining_date' => $request->joining_date,
         ]);
-
         return response()->json([
             'message' => 'Employee updated successfully!',
-            'photo' => asset( $employee->photo),
+            'photo' => asset($employee->photo),
         ]);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $employee = Employee::where('id', $id)->first();
