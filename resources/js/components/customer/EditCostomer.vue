@@ -5,7 +5,6 @@ import notification from "../../Helpers/Notification";
 export default {
     mounted() {
         if (!User.loggedIn()) {
-            // ডিবাগিংয়ের জন্য
             this.$router.push("/");
         }
     },
