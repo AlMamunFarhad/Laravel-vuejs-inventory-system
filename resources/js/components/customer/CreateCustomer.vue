@@ -5,7 +5,7 @@ import notification from "../../Helpers/Notification";
 
 export default {
     mounted() {
-        if (!User.loggedIn()) {  // ডিবাগিংয়ের জন্য
+        if (!User.loggedIn()) {
             this.$router.push("/");
         }
     },
@@ -40,15 +40,12 @@ export default {
             .then(res => {
                 notification.success();
                 this.$router.push("customers")
-                
             })
             .catch(error => this.errors = error.response.data.errors)
         },
     },
 };
 </script>
-
-
 <template>
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
