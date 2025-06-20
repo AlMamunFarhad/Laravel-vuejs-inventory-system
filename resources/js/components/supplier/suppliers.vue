@@ -3,7 +3,7 @@
         <div class="col-12 col-lg-12 col-xxl-12 d-flex">
             <div class="card flex-fill p-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title mb-0 fs-2">Employees</h3>
+                    <h3 class="card-title mb-0 fs-2">Suppliers</h3>
                     <input
                         type="text"
                         style="width: 20rem"
